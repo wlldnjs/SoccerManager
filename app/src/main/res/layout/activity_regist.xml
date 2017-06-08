@@ -63,6 +63,7 @@
         android:layout_height="wrap_content"
         android:inputType="date"
         android:hint="생년월일 앞6자리"
+        android:maxLength="6"
         android:layout_marginTop="17dp"
         app:layout_constraintTop_toBottomOf="@+id/name"
         android:layout_marginLeft="8dp"
@@ -72,15 +73,22 @@
         app:layout_constraintHorizontal_bias="0.385" />
 
     <Spinner
-        android:id="@+id/country"
-        android:layout_width="200dp"
+        android:id="@+id/country1"
+        android:layout_width="85dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="17dp"
         app:layout_constraintTop_toBottomOf="@+id/birth"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent">
+        android:layout_marginLeft="92dp"
+        app:layout_constraintLeft_toLeftOf="parent"></Spinner>
+
+    <Spinner
+        android:id="@+id/country2"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@+id/country1"
+        android:layout_marginLeft="92dp"
+        app:layout_constraintLeft_toLeftOf="parent">
 
     </Spinner>
 
@@ -100,11 +108,11 @@
         android:layout_height="wrap_content"
         android:text="선호 포지션"
         android:textSize="15sp"
-        android:layout_marginTop="29dp"
-        app:layout_constraintTop_toBottomOf="@+id/country"
+        android:id="@+id/textView2"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/country2"
         android:layout_marginLeft="44dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:id="@+id/textView2" />
+        app:layout_constraintLeft_toLeftOf="parent" />
 
     <RadioGroup
         android:id="@+id/position"
