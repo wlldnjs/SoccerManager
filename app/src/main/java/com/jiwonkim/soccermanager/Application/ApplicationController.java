@@ -7,5 +7,18 @@ import android.app.Application;
  */
 
 public class ApplicationController extends Application {
+    private static ApplicationController instance;
+    public static ApplicationController getInstance(){
+        return instance;
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        ApplicationController.instance = this;
+    }
+
+    public ApplicationController() {
+    }
 
 }
