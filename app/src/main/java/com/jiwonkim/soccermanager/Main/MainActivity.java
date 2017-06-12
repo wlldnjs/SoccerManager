@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         viewPager = (ViewPager)findViewById(R.id.viewpager);
         viewPager.setAdapter(new pagerAdapter(getSupportFragmentManager()));
+        viewPager.setOffscreenPageLimit(3);
         viewPager.setCurrentItem(0);
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
