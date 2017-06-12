@@ -19,6 +19,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+//        startActivity(new Intent(this, SplashActivity.class));    // 스플래시
 
         regist = (TextView)findViewById(R.id.regist);
         loginBtn = (Button)findViewById(R.id.login);

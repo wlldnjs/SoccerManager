@@ -20,7 +20,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".Main.RegistActivity" />
-        <activity android:name=".Main.MainActivity"></activity>
+        <activity android:name=".Main.MainActivity" />
+        <activity android:name=".Main.SplashActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden">
+        </activity>
     </application>
 
 </manifest>
