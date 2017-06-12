@@ -4,27 +4,35 @@
     android:layout_height="match_parent"
     android:background="@drawable/fragment2">
 
-    <EditText
-        android:id="@+id/editSearch"
+    <RelativeLayout
+        android:id="@+id/editSearchLayout"
         android:layout_marginTop="30dp"
         android:layout_marginLeft="30dp"
-        android:layout_marginRight="60dp"
+        android:layout_marginRight="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="구단 또는 플레이어 아이디.."/>
+        android:background="@drawable/rectangle_box">
+        <EditText
+            android:id="@+id/editSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="구단 또는 플레이어 아이디.."
+            android:textColor="#ffffff"
+            android:textColorHint="#bbbbbb"/>
 
-    <ImageView
-        android:id="@+id/searchBtn"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:src="@drawable/search_btn1"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="30dp"
-        android:layout_alignBottom="@id/editSearch"
-        android:layout_marginBottom="10dp"/>
+        <ImageView
+            android:id="@+id/searchBtn"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/search_btn1"
+            android:layout_alignParentRight="true"
+            android:layout_alignBottom="@id/editSearch"
+            android:layout_marginBottom="10dp"/>
+    </RelativeLayout>
+
 
     <FrameLayout
-        android:layout_below="@+id/editSearch"
+        android:layout_below="@+id/editSearchLayout"
         android:background="@drawable/rectangle_box"
         android:layout_margin="30dp"
         android:layout_width="match_parent"
@@ -34,24 +42,41 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="5">
+                android:layout_weight="5"
+                android:orientation="vertical">
+
                 <TextView
-                    android:layout_margin="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="구단"
-                    android:textSize="15sp"
-                    android:textColor="#000000"/>
-                <android.support.v7.widget.RecyclerView
                     android:layout_margin="10dp"
+                    android:text="구단"
+                    android:textColor="#ffffff"
+                    android:textSize="15sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/white_line" />
+
+                <android.support.v7.widget.RecyclerView
                     android:id="@+id/recyclerSearch1"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"></android.support.v7.widget.RecyclerView>
             </LinearLayout>
+
+            <View
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="@drawable/white_line"/>
 
             <LinearLayout
                 android:orientation="vertical"
@@ -64,7 +89,15 @@
                     android:layout_height="wrap_content"
                     android:text="플레이어"
                     android:textSize="15sp"
-                    android:textColor="#000000"/>
+                    android:textColor="#ffffff"/>
+
+                <View
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp"
+                    android:background="@drawable/white_line"/>
+
                 <android.support.v7.widget.RecyclerView
                     android:layout_margin="10dp"
                     android:id="@+id/recyclerSearch2"

@@ -3,11 +3,49 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/fragment3">
-    <TextView
-        android:layout_centerInParent="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        android:text="마이페이지"/>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:background="@drawable/rectangle_box"
+        android:layout_margin="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:background="@drawable/rectangle_stroke_white"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="실력 측정"
+            android:textColor="#ffffff"
+            android:textSize="20sp"/>
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rectangle_stroke_white"
+            android:text="내 정보"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+
+        <Button
+            android:background="@drawable/rectangle_stroke_white"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="팀 정보"
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+            android:layout_marginTop="10dp"/>
+
+        <Button
+            android:background="@drawable/rectangle_stroke_white"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="설정"
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+            android:layout_marginTop="10dp"/>
+
+    </LinearLayout>
 </RelativeLayout>
