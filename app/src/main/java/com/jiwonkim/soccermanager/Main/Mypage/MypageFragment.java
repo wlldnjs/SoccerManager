@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 
+import com.jiwonkim.soccermanager.Main.Mypage.Formation.Formation;
 import com.jiwonkim.soccermanager.R;
 
 /**

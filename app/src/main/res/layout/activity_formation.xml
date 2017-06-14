@@ -1,16 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="@drawable/fragment3"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.jiwonkim.soccermanager.Main.Mypage.Formation">
+    tools:context="com.jiwonkim.soccermanager.Main.Mypage.Formation.Formation">
 
     <LinearLayout
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:orientation="horizontal"
+        android:id="@+id/squad"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5">
+        <Button
+            android:id="@+id/squad1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:background="@drawable/rectangle_stroke_white"
+            android:text="스쿼드1"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:textColor="#ffffff"/>
+        <Button
+            android:id="@+id/squad2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:background="@drawable/rectangle_stroke_white"
+            android:text="스쿼드2"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:textColor="#ffffff"/>
+        <Button
+            android:id="@+id/squad3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:background="@drawable/rectangle_stroke_white"
+            android:text="스쿼드3"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:textColor="#ffffff"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:id="@+id/ground"
         android:background="@drawable/ground"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
-        android:orientation="vertical">
+        android:layout_height="0dp"
+        android:layout_weight="8.5"
+        android:orientation="vertical"
+        >
 
         <LinearLayout
             android:id="@+id/fwArea"
@@ -126,17 +171,15 @@
             android:layout_height="0dp"
             android:layout_weight="1.2"></LinearLayout>
     </LinearLayout>
-    <ImageView
-        android:id="@+id/image1"
-        android:src="@drawable/man"
-        android:layout_below="@+id/ground"
-        android:layout_width="80dp"
-        android:layout_height="80dp" />
-    <ImageView
-        android:id="@+id/image2"
-        android:src="@drawable/man"
-        android:layout_below="@+id/ground"
-        android:layout_toRightOf="@id/image1"
-        android:layout_width="80dp"
-        android:layout_height="80dp" />
-</RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_player_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            ></android.support.v7.widget.RecyclerView>
+    </LinearLayout>
+</LinearLayout>
