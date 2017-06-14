@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.jiwonkim.soccermanager.Main.RegistActivity">
+    tools:context="com.jiwonkim.soccermanager.Main.RegistActivity"
+    android:background="@drawable/title">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="35sp"
-        android:textColor="#000000"
+        android:textColor="#ffffff"
         android:textStyle="bold"
         android:text="회원가입"
         android:id="@+id/textView3"
@@ -26,6 +27,8 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:hint="아이디"
+        android:textColor="#ffffff"
+        android:textColorHint="#ffffff"
         android:singleLine="true"
         android:nextFocusDown="@+id/password"
         android:maxLength="15"
@@ -41,6 +44,8 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:hint="비밀번호"
+        android:textColor="#ffffff"
+        android:textColorHint="#ffffff"
         android:singleLine="true"
         android:nextFocusDown="@+id/name"
         android:maxLength="15"
@@ -56,6 +61,8 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:hint="이름"
+        android:textColor="#ffffff"
+        android:textColorHint="#ffffff"
         android:singleLine="true"
         android:maxLength="15"
         android:nextFocusDown="@+id/birth"
@@ -72,6 +79,8 @@
         android:layout_height="wrap_content"
         android:inputType="date"
         android:hint="생년월일 앞6자리"
+        android:textColor="#ffffff"
+        android:textColorHint="#ffffff"
         android:maxLength="6"
         android:nextFocusDown="@+id/contry1"
         android:layout_marginTop="17dp"
@@ -109,12 +118,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="가입하기"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="#ffffff"
         android:layout_marginRight="16dp"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="16dp" />
 
     <TextView
+        android:textColor="#ffffff"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="선호 포지션"
@@ -142,24 +156,28 @@
             android:id="@+id/fw"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#ffffff"
             android:text="공격수" />
 
         <CheckBox
             android:id="@+id/mf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#ffffff"
             android:text="수비수" />
 
         <CheckBox
             android:id="@+id/cf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#ffffff"
             android:text="미드필더" />
 
         <CheckBox
             android:id="@+id/gk"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#ffffff"
             android:text="골키퍼" />
     </RadioGroup>
 

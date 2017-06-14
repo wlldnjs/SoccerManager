@@ -106,11 +106,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 case 0:
                     return new HomeFragment();
                 case 1:
-                    SearchFragment fragment = new SearchFragment();
-                    fragment.setContext(getApplicationContext());
-                    return fragment;
+                    SearchFragment search = new SearchFragment();
+                    search.setContext(getApplicationContext());
+                    return search;
                 case 2:
-                    return new MypageFragment();
+                    MypageFragment mypage = new MypageFragment();
+                    mypage.setContext(getApplicationContext());
+                    return mypage;
                 case 3:
                     return new ScheduleFragment();
                 case 4:
