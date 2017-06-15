@@ -116,7 +116,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 case 3:
                     return new ScheduleFragment();
                 case 4:
-                    return new TalkFragment();
+                    TalkFragment talk = new TalkFragment();
+                    talk.setContext(getApplicationContext());
+                    return talk;
                 default:
                     return null;
             }
