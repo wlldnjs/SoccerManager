@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -31,6 +32,7 @@ public class SearchFragment extends Fragment{
     LinearLayoutManager linearLayoutManager;
     ArrayList<SearchListData> itemDatas;
     SearchAdapter searchAdapter;
+    FrameLayout searchResult;
 
     public SearchFragment() {
     }
@@ -49,6 +51,8 @@ public class SearchFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         RelativeLayout layout = (RelativeLayout) inflater.inflate(R.layout.fragment_search,container,false);
 
+        searchResult = (FrameLayout)layout.findViewById(R.id.search_result);
+
         editSearch = (EditText)layout.findViewById(R.id.editSearch);
         searchBtn = (ImageView)layout.findViewById(R.id.searchBtn);
         recyclerSearch1 = (RecyclerView)layout.findViewById(R.id.recyclerSearch1);
@@ -61,16 +65,20 @@ public class SearchFragment extends Fragment{
         recyclerSearch1.setLayoutManager(linearLayoutManager);
 
         itemDatas = new ArrayList<SearchListData>();
+        itemDatas.add(new SearchListData(R.drawable.man,"hangyu","최한규","전곡조기축구회"));
+        itemDatas.add(new SearchListData(R.drawable.man,"jiwon","김지원","동두천FC"));
+        itemDatas.add(new SearchListData(R.drawable.man,"jinsung","윤진성","노원볼보이"));
+        itemDatas.add(new SearchListData(R.drawable.man,"youngbum","김영범",""));
+        itemDatas.add(new SearchListData(R.drawable.man,"2no","백인호","노원FC"));
+
         searchAdapter = new SearchAdapter(itemDatas,clickListener);
         recyclerSearch1.setAdapter(searchAdapter);
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                itemDatas.add(new SearchListData(R.drawable.man,"hangyu","최한규","전곡조기축구회"));
-                itemDatas.add(new SearchListData(R.drawable.man,"jiwon","김지원","동두천FC"));
-                itemDatas.add(new SearchListData(R.drawable.man,"jinsung","윤진성","노원볼보이"));
-                itemDatas.add(new SearchListData(R.drawable.man,"youngbum","김영범",""));
-                itemDatas.add(new SearchListData(R.drawable.man,"2no","백인호","노원FC"));
+                if(searchResult.getVisibility() == View.INVISIBLE) {
+                    searchResult.setVisibility(View.VISIBLE);
+                }
                 searchAdapter.notifyDataSetChanged();
             }
         });

@@ -36,6 +36,8 @@
 
 
     <FrameLayout
+        android:id="@+id/search_result"
+        android:visibility="invisible"
         android:layout_below="@+id/editSearchLayout"
         android:background="@drawable/rectangle_box"
         android:layout_margin="30dp"
