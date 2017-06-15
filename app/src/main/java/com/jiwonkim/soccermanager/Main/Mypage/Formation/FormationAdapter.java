@@ -14,7 +14,7 @@ import java.util.ArrayList;
  * Created by user on 2017-06-14.
  */
 
-public class FormationAdapter extends RecyclerView.Adapter<FormationItemViewHolder>{
+public class FormationAdapter extends RecyclerView.Adapter<FormationItemViewHolder> {
     ArrayList<PlayerListData> itemDatas;
     View.OnTouchListener touchListener;
 
