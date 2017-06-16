@@ -24,8 +24,10 @@
         <activity
             android:name=".Main.SplashActivity"
             android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".Main.Mypage.Formation.Formation"></activity>
+            android:screenOrientation="portrait" />
+        <activity android:name=".Main.Mypage.Formation.Formation" />
+        <activity android:name=".Main.Mypage.Exam.ExamActivity" />
+        <activity android:name=".Main.Mypage.Exam.ExamResultActivity"></activity>
     </application>
 
 </manifest>

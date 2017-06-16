@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.jiwonkim.soccermanager.Main.Mypage.Exam.ExamActivity;
 import com.jiwonkim.soccermanager.Main.Mypage.Formation.Formation;
 import com.jiwonkim.soccermanager.R;
 
@@ -20,7 +21,7 @@ import com.jiwonkim.soccermanager.R;
  */
 
 public class MypageFragment extends Fragment implements View.OnClickListener{
-    Button test, myInfo, teamInfo, setting;
+    Button exam, myInfo, teamInfo, setting;
     Context context;
 
     public MypageFragment() {
@@ -39,12 +40,12 @@ public class MypageFragment extends Fragment implements View.OnClickListener{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         RelativeLayout layout = (RelativeLayout) inflater.inflate(R.layout.fragment_mypage,container,false);
-        test = (Button) layout.findViewById(R.id.test);
+        exam = (Button) layout.findViewById(R.id.exam);
         myInfo = (Button) layout.findViewById(R.id.myInfo);
         teamInfo = (Button) layout.findViewById(R.id.teamInfo);
         setting = (Button) layout.findViewById(R.id.setting);
 
-        test.setOnClickListener(this);
+        exam.setOnClickListener(this);
         myInfo.setOnClickListener(this);
         teamInfo.setOnClickListener(this);
         setting.setOnClickListener(this);
@@ -60,8 +61,8 @@ public class MypageFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.test:
-                Toast.makeText(context, "준비중입니다.", Toast.LENGTH_SHORT).show();
+            case R.id.exam:
+                startActivity(new Intent(context, ExamActivity.class));
                 break;
             case R.id.myInfo:
                 Toast.makeText(context, "준비중입니다.", Toast.LENGTH_SHORT).show();
