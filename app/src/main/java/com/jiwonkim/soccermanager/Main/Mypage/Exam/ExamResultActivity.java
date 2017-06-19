@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -12,7 +13,7 @@ import android.widget.TextView;
 
 import com.jiwonkim.soccermanager.R;
 
-public class ExamResultActivity extends AppCompatActivity implements Runnable {
+public class ExamResultActivity extends AppCompatActivity implements Runnable,View.OnTouchListener {
     TextView resultText, textTotal;
     RatingBar lating_speed, lating_acc, lating_heal, lating_agil, lating_total;
     int speed, acc, heal, agil;
@@ -50,7 +51,7 @@ public class ExamResultActivity extends AppCompatActivity implements Runnable {
         lating_heal.setMax(5);
         lating_agil.setMax(5);
         lating_total.setMax(5);
-        lating_total.setStepSize((float)0.5);
+        lating_total.setStepSize((float)0.25);
 
         lating_speed.setRating((float)speed);
         lating_acc.setRating((float)acc);
@@ -58,6 +59,12 @@ public class ExamResultActivity extends AppCompatActivity implements Runnable {
         lating_agil.setRating((float)agil);
         lating_total.setRating(totalCount);
         textTotal.setText(""+totalCount);
+
+        lating_speed.setOnTouchListener(this);
+        lating_heal.setOnTouchListener(this);
+        lating_acc.setOnTouchListener(this);
+        lating_agil.setOnTouchListener(this);
+        lating_total.setOnTouchListener(this);
         Log.d("총 점수", ""+totalCount);
     }
 
@@ -83,4 +90,9 @@ public class ExamResultActivity extends AppCompatActivity implements Runnable {
             }
         }
     };
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        return true;
+    }
 }

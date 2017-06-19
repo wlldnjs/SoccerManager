@@ -27,7 +27,8 @@
             android:screenOrientation="portrait" />
         <activity android:name=".Main.Mypage.Formation.Formation" />
         <activity android:name=".Main.Mypage.Exam.ExamActivity" />
-        <activity android:name=".Main.Mypage.Exam.ExamResultActivity"></activity>
+        <activity android:name=".Main.Mypage.Exam.ExamResultActivity" />
+        <activity android:name=".Main.Mypage.MyInfo.MyInfoActivity"></activity>
     </application>
 
 </manifest>

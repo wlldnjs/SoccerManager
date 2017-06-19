@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.jiwonkim.soccermanager.Main.Mypage.Exam.ExamActivity;
 import com.jiwonkim.soccermanager.Main.Mypage.Formation.Formation;
+import com.jiwonkim.soccermanager.Main.Mypage.MyInfo.MyInfoActivity;
 import com.jiwonkim.soccermanager.R;
 
 /**
@@ -65,7 +66,7 @@ public class MypageFragment extends Fragment implements View.OnClickListener{
                 startActivity(new Intent(context, ExamActivity.class));
                 break;
             case R.id.myInfo:
-                Toast.makeText(context, "준비중입니다.", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(context, MyInfoActivity.class));
                 break;
             case R.id.teamInfo:
                 startActivity(new Intent(context, Formation.class));

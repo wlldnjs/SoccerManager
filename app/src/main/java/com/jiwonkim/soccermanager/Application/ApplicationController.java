@@ -16,7 +16,7 @@ public class ApplicationController extends Application {
     public static ApplicationController getInstance(){
         return instance;
     }
-    private static String baseUrl = "http://210.123.255.157:3000";
+    private static String baseUrl = "http://210.123.255.158:3000";
     private NetworkService networkService;
     public NetworkService getNetworkService(){
         return networkService;

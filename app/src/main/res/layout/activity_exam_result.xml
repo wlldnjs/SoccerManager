@@ -19,7 +19,7 @@
             android:text="결과를 측정중 입니다...."
             android:layout_marginTop="50dp"
             android:textColor="#ffffff"
-            android:textSize="30sp"/>
+            android:textSize="27sp"/>
 
         <ProgressBar
             android:id="@+id/progress"
@@ -96,24 +96,28 @@
                     android:id="@+id/lating_speed"
                     android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content" />
                 <RatingBar
                     android:id="@+id/lating_acc"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    />
                 <RatingBar
                     android:id="@+id/lating_heal"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:clickable="false"/>
                 <RatingBar
                     android:id="@+id/lating_agil"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:clickable="false"/>
                 <RatingBar
                     android:id="@+id/lating_total"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="50dp" />
+                    android:layout_marginTop="50dp"
+                    android:clickable="false"/>
                 <TextView
                     android:id="@+id/text_total"
                     android:layout_width="wrap_content"

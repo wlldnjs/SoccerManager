@@ -5,4 +5,5 @@ package com.jiwonkim.soccermanager.Network;
  */
 
 public interface NetworkService {
+
 }
