@@ -10,8 +10,18 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.jiwonkim.soccermanager.Application.ApplicationController;
+import com.jiwonkim.soccermanager.Main.Mypage.ModifyResult;
+import com.jiwonkim.soccermanager.Network.NetworkService;
 import com.jiwonkim.soccermanager.R;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import static com.jiwonkim.soccermanager.Main.Login.LoginActivity.loginUserData;
 
 public class ExamResultActivity extends AppCompatActivity implements Runnable,View.OnTouchListener {
     TextView resultText, textTotal;
@@ -21,11 +31,14 @@ public class ExamResultActivity extends AppCompatActivity implements Runnable,Vi
     float totalCount;
     ProgressBar progress;
     Handler process;
+    NetworkService service;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exam_result);
+
+        service = ApplicationController.getInstance().getNetworkService();
 
         resultText = (TextView)findViewById(R.id.resultText1);
         textTotal = (TextView)findViewById(R.id.text_total);
@@ -42,6 +55,31 @@ public class ExamResultActivity extends AppCompatActivity implements Runnable,Vi
         heal = getIntent().getExtras().getInt("health");
         agil = getIntent().getExtras().getInt("agility");
         totalCount = (float)(speed+acc+heal+agil)/4;
+
+        loginUserData.mySpeed = String.valueOf(speed);
+        loginUserData.acceleration = String.valueOf(acc);
+        loginUserData.health = String.valueOf(heal);
+        loginUserData.agility = String.valueOf(agil);
+
+        Call<ModifyResult> requestModify = service.getModifyResult(loginUserData.id, loginUserData);
+        requestModify.enqueue(new Callback<ModifyResult>() {
+            @Override
+            public void onResponse(Call<ModifyResult> call, Response<ModifyResult> response) {
+                if(response.isSuccessful()){
+                    if(response.body().status.equals("success")){
+                        Toast.makeText(ExamResultActivity.this, "측정결과가 저장되었습니다.", Toast.LENGTH_SHORT).show();
+//                        Fragment frg = null;
+                    } else{
+                        Toast.makeText(ExamResultActivity.this, "저장 실패 " +response.body().reason, Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ModifyResult> call, Throwable t) {
+                Toast.makeText(ExamResultActivity.this, "서버와 통신상태를 확인해 주세요.", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         process = new Handler();
         new Thread(ExamResultActivity.this).start();

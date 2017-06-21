@@ -1,5 +1,6 @@
 package com.jiwonkim.soccermanager.Main;
 
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -17,6 +18,7 @@ import com.jiwonkim.soccermanager.Main.Search.SearchFragment;
 import com.jiwonkim.soccermanager.Main.Talk.TalkFragment;
 import com.jiwonkim.soccermanager.R;
 
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     ImageView homeBtn, searchBtn, mypageBtn, scheduleBtn, talkBtn;
     ViewPager viewPager;
@@ -24,7 +26,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private long backKeyPressedTime = 0;
     private Toast toast;
-    private AppCompatActivity activity;
+//    HomeFragment homeFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +52,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         viewPager = (ViewPager)findViewById(R.id.viewpager);
         viewPager.setAdapter(new pagerAdapter(getSupportFragmentManager()));
-        viewPager.setOffscreenPageLimit(3);
+        viewPager.setOffscreenPageLimit(1);
         viewPager.setCurrentItem(0);
+
+//        homeFragment = new HomeFragment();
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -104,6 +108,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         public Fragment getItem(int position) {
             switch (position){
                 case 0:
+//                    homeFragment = new HomeFragment();
                     return new HomeFragment();
                 case 1:
                     SearchFragment search = new SearchFragment();
@@ -170,4 +175,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        FragmentTransaction ft = getFragmentManager().beginTransaction();
+////        ft.detach(homeFragment).attach(homeFragment).commit();
+//    }
 }

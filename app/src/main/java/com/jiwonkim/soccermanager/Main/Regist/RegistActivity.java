@@ -1,7 +1,8 @@
-package com.jiwonkim.soccermanager.Main;
+package com.jiwonkim.soccermanager.Main.Regist;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -12,7 +13,13 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.jiwonkim.soccermanager.Application.ApplicationController;
+import com.jiwonkim.soccermanager.Network.NetworkService;
 import com.jiwonkim.soccermanager.R;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class RegistActivity extends AppCompatActivity {
     EditText editId, editPw, editName, editBirth;
@@ -22,24 +29,27 @@ public class RegistActivity extends AppCompatActivity {
     Button signBtn;
 
     String[] country_list1;
+    NetworkService service;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_regist);
 
-        editId = (EditText)findViewById(R.id.id);
-        editPw = (EditText)findViewById(R.id.password);
-        editName = (EditText)findViewById(R.id.name);
-        editBirth = (EditText)findViewById(R.id.birth);
+        service = ApplicationController.getInstance().getNetworkService();
 
-        country1 = (Spinner)findViewById(R.id.country1);
-        country2 = (Spinner)findViewById(R.id.country2);
-        positions = (RadioGroup)findViewById(R.id.position);
-        fw = (CheckBox)findViewById(R.id.fw);
-        mf = (CheckBox)findViewById(R.id.mf);
-        cf = (CheckBox)findViewById(R.id.cf);
-        gk = (CheckBox)findViewById(R.id.gk);
+        editId = (EditText)findViewById(R.id.regist_id);
+        editPw = (EditText)findViewById(R.id.regist_password);
+        editName = (EditText)findViewById(R.id.regist_name);
+        editBirth = (EditText)findViewById(R.id.regist_birth);
+
+        country1 = (Spinner)findViewById(R.id.regist_country1);
+        country2 = (Spinner)findViewById(R.id.regist_country2);
+        positions = (RadioGroup)findViewById(R.id.regist_position);
+        fw = (CheckBox)findViewById(R.id.regist_fw);
+        mf = (CheckBox)findViewById(R.id.regist_mf);
+        cf = (CheckBox)findViewById(R.id.regist_cf);
+        gk = (CheckBox)findViewById(R.id.regist_gk);
 
         signBtn = (Button)findViewById(R.id.signBtn);
 
@@ -153,11 +163,12 @@ public class RegistActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try{
-                    String id = editId.getText().toString();
-                    String pw = editPw.getText().toString();
-                    String name = editName.getText().toString();
-                    int birth = Integer.parseInt(editBirth.getText().toString());
-                    String country = country1.getSelectedItem().toString() +" " +country2.getSelectedItem().toString();
+                    MemberData memberData = new MemberData();
+                    memberData.id = editId.getText().toString();
+                    memberData.password = editPw.getText().toString();
+                    memberData.name = editName.getText().toString();
+                    memberData.birth = editBirth.getText().toString();
+                    memberData.area = country1.getSelectedItem().toString() +" " +country2.getSelectedItem().toString();
                     String position = "";
                     if(fw.isChecked()){
                         position += "f";
@@ -171,10 +182,32 @@ public class RegistActivity extends AppCompatActivity {
                     if(gk.isChecked()){
                         position += "g";
                     }
+                    memberData.preferredPosition = position;
+                    Call<RegistResult> requestRegist = service.getRegistResult(memberData);
+                    requestRegist.enqueue(new Callback<RegistResult>() {
+                        @Override
+                        public void onResponse(Call<RegistResult> call, Response<RegistResult> response) {
+                            if(response.isSuccessful()){
+                                if(response.body().status.equals("success")){
+                                    Toast.makeText(RegistActivity.this, "회원가입이 완료되었습니다.", Toast.LENGTH_SHORT).show();
+                                    finish();
+                                }
+                            } else {
+                                Toast.makeText(RegistActivity.this, "통신 실패 : " +response.body().status, Toast.LENGTH_SHORT).show();
+                            }
+                        }
 
-                    Toast.makeText(RegistActivity.this, "id : " +id +"\npw : " +pw +"\nname : " +name +"\nbirth : " +birth +"\ncountry : " +country +"\nposition : " +position, Toast.LENGTH_SHORT).show();
-                    finish();
+                        @Override
+                        public void onFailure(Call<RegistResult> call, Throwable t) {
+                            Toast.makeText(RegistActivity.this, "서버와의 통신 상태를 확인해 주세요.", Toast.LENGTH_SHORT).show();
+                            Log.d("fail", t.getMessage());
+                        }
+                    });
+
+//                    Toast.makeText(RegistActivity.this, "id : " +id +"\npw : " +pw +"\nname : " +name +"\nbirth : " +birth +"\ncountry : " +country +"\nposition : " +position, Toast.LENGTH_SHORT).show();
+//                    finish();
                 } catch (Exception e){
+                    Toast.makeText(RegistActivity.this, "입력정보를 확인해주세요.", Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
                 }
             }

@@ -7,6 +7,8 @@ import android.widget.TextView;
 
 import com.jiwonkim.soccermanager.R;
 
+import static com.jiwonkim.soccermanager.Main.Login.LoginActivity.loginUserData;
+
 public class MyInfoActivity extends AppCompatActivity {
     TextView id, name, birth, country, position, team, speed, acc, health, agil, aver;
     Button editBtn;
@@ -25,9 +27,20 @@ public class MyInfoActivity extends AppCompatActivity {
         acc = (TextView)findViewById(R.id.myInfo_acc);
         health = (TextView)findViewById(R.id.myInfo_health);
         agil = (TextView)findViewById(R.id.myInfo_agil);
-        aver = (TextView)findViewById(R.id.myInfo_agil);
+        aver = (TextView)findViewById(R.id.myInfo_aver);
         editBtn = (Button)findViewById(R.id.myInfo_edit);
 
-
+        id.setText(loginUserData.id);
+        name.setText(loginUserData.name);
+        birth.setText(loginUserData.birth);
+        country.setText(loginUserData.area);
+        position.setText(loginUserData.preferredPosition);
+        team.setText(loginUserData.myTeamName);
+        speed.setText(loginUserData.mySpeed);
+        acc.setText(loginUserData.acceleration);
+        health.setText(loginUserData.health);
+        agil.setText(loginUserData.agility);
+        float total =(float)(Integer.parseInt(loginUserData.mySpeed) +Integer.parseInt(loginUserData.acceleration) +Integer.parseInt(loginUserData.health) +Integer.parseInt(loginUserData.agility))/4;
+        aver.setText(""+total);
     }
 }

@@ -21,7 +21,8 @@
             android:textColorHint="#bbbbbb"
             android:layout_marginRight="50dp"
             android:singleLine="true"
-            android:maxLength="15"/>
+            android:maxLength="15"
+            android:nextFocusDown="@+id/searchBtn"/>
 
         <ImageView
             android:id="@+id/searchBtn"
@@ -30,7 +31,6 @@
             android:src="@drawable/search_btn1"
             android:layout_alignParentRight="true"
             android:layout_alignBottom="@id/editSearch"
-
             />
     </RelativeLayout>
 

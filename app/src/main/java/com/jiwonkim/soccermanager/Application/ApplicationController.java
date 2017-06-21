@@ -27,7 +27,7 @@ public class ApplicationController extends Application {
         super.onCreate();
         ApplicationController.instance = this;
 
-//        buildService();       //통신소스 완료 후 주석풀자.
+        buildService();       //통신소스 완료 후 주석풀자.
     }
 
     public void buildService(){

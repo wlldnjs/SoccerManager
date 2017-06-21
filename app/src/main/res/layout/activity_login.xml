@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.jiwonkim.soccermanager.Main.LoginActivity"
+    tools:context="com.jiwonkim.soccermanager.Main.Login.LoginActivity"
     android:background="@drawable/title">
 
     <ImageView
