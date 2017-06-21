@@ -41,7 +41,11 @@ public class HomeFragment extends Fragment{
         agil = (TextView)layout.findViewById(R.id.home_agil);
         aver = (TextView)layout.findViewById(R.id.home_aver);
 
-        teamName.setText(loginUserData.myTeamName);
+        if(loginUserData.myTeamName == null){
+            teamName.setText("(소속 팀이 없습니다.)");
+        }else {
+            teamName.setText(loginUserData.myTeamName);
+        }
         speed.setText(loginUserData.mySpeed);
         acc.setText(loginUserData.acceleration);
         heal.setText(loginUserData.health);

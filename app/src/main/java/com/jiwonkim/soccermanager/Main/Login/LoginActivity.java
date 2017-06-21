@@ -75,7 +75,6 @@ public class LoginActivity extends AppCompatActivity {
                                 }
                                 if(loginUserData.preferredPosition.contains("m")){
                                     newPosition += loginUserData.preferredPosition.replace("m", "미드필더 ");
-
                                 }
                                 if(loginUserData.preferredPosition.contains("c")){
                                     newPosition += loginUserData.preferredPosition.replace("c", "수비수 ");
@@ -85,9 +84,6 @@ public class LoginActivity extends AppCompatActivity {
                                 }
                                 loginUserData.preferredPosition = newPosition;
                                 loginUserData.myTeamName = response.body().resultData.myTeamName;
-                                if(loginUserData.myTeamName == null){
-                                    loginUserData.myTeamName = "(소속 팀이 없습니다.)";
-                                }
                                 loginUserData.mySpeed = response.body().resultData.mySpeed;
                                 if(loginUserData.mySpeed == null){
                                     loginUserData.mySpeed = "0";

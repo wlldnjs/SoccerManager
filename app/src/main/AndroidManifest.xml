@@ -28,7 +28,9 @@
         <activity android:name=".Main.Mypage.Formation.Formation" />
         <activity android:name=".Main.Mypage.Exam.ExamActivity" />
         <activity android:name=".Main.Mypage.Exam.ExamResultActivity" />
-        <activity android:name=".Main.Mypage.MyInfo.MyInfoActivity"></activity>
+        <activity android:name=".Main.Mypage.MyInfo.MyInfoActivity" />
+        <activity android:name=".Main.Mypage.SettingActivity" />
+        <activity android:name=".Main.TeamPage.TeamManage.TeamCreateActivity"></activity>
     </application>
 
 </manifest>

@@ -10,10 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.jiwonkim.soccermanager.Main.Mypage.Exam.ExamActivity;
-import com.jiwonkim.soccermanager.Main.Mypage.Formation.Formation;
 import com.jiwonkim.soccermanager.Main.Mypage.MyInfo.MyInfoActivity;
 import com.jiwonkim.soccermanager.R;
 
@@ -22,7 +20,7 @@ import com.jiwonkim.soccermanager.R;
  */
 
 public class MypageFragment extends Fragment implements View.OnClickListener{
-    Button exam, myInfo, teamInfo, setting;
+    Button exam, myInfo, setting;     //teamInfo 제거
     Context context;
 
     public MypageFragment() {
@@ -43,19 +41,14 @@ public class MypageFragment extends Fragment implements View.OnClickListener{
         RelativeLayout layout = (RelativeLayout) inflater.inflate(R.layout.fragment_mypage,container,false);
         exam = (Button) layout.findViewById(R.id.exam);
         myInfo = (Button) layout.findViewById(R.id.myInfo);
-        teamInfo = (Button) layout.findViewById(R.id.teamInfo);
+//        teamInfo = (Button) layout.findViewById(R.id.teamInfo);
         setting = (Button) layout.findViewById(R.id.setting);
 
         exam.setOnClickListener(this);
         myInfo.setOnClickListener(this);
-        teamInfo.setOnClickListener(this);
+//        teamInfo.setOnClickListener(this);
         setting.setOnClickListener(this);
-//        teamInfo.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                startActivity(new Intent(context, Formation.class));
-//            }
-//        });
+
         return layout;
     }
 
@@ -68,11 +61,11 @@ public class MypageFragment extends Fragment implements View.OnClickListener{
             case R.id.myInfo:
                 startActivity(new Intent(context, MyInfoActivity.class));
                 break;
-            case R.id.teamInfo:
-                startActivity(new Intent(context, Formation.class));
-                break;
+//            case R.id.teamInfo:
+//                startActivity(new Intent(context, Formation.class));
+//                break;
             case R.id.setting:
-                Toast.makeText(context, "준비중입니다.", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(context, SettingActivity.class));
                 break;
         }
     }

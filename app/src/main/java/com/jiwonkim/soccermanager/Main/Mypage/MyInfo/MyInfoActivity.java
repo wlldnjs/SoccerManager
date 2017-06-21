@@ -35,7 +35,11 @@ public class MyInfoActivity extends AppCompatActivity {
         birth.setText(loginUserData.birth);
         country.setText(loginUserData.location);
         position.setText(loginUserData.preferredPosition);
-        team.setText(loginUserData.myTeamName);
+        if(loginUserData.myTeamName == null){
+            team.setText("(소속 팀이 없습니다.)");
+        }else {
+            team.setText(loginUserData.myTeamName);
+        }
         speed.setText(loginUserData.mySpeed);
         acc.setText(loginUserData.acceleration);
         health.setText(loginUserData.health);

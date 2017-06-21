@@ -14,10 +14,12 @@ import android.widget.Toast;
 
 import com.jiwonkim.soccermanager.Main.Home.HomeFragment;
 import com.jiwonkim.soccermanager.Main.Mypage.MypageFragment;
-import com.jiwonkim.soccermanager.Main.Schedule.ScheduleFragment;
+import com.jiwonkim.soccermanager.Main.TeamPage.TeamPageFragment;
 import com.jiwonkim.soccermanager.Main.Search.SearchFragment;
 import com.jiwonkim.soccermanager.Main.Talk.TalkFragment;
 import com.jiwonkim.soccermanager.R;
+
+import static com.jiwonkim.soccermanager.R.id.schedule;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
@@ -39,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         homeBtn = (ImageView) findViewById(R.id.home);
         searchBtn = (ImageView) findViewById(R.id.search);
         mypageBtn = (ImageView) findViewById(R.id.mypage);
-        scheduleBtn = (ImageView) findViewById(R.id.schedule);
+        scheduleBtn = (ImageView) findViewById(schedule);
         talkBtn = (ImageView) findViewById(R.id.talk);
 
         homeBtn.setOnClickListener(this);
@@ -124,7 +126,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     mypage.setContext(getApplicationContext());
                     return mypage;
                 case 3:
-                    return new ScheduleFragment();
+                    TeamPageFragment teampage = new TeamPageFragment();
+                    teampage.setContext(getApplicationContext());
+                    return teampage;
                 case 4:
                     TalkFragment talk = new TalkFragment();
                     talk.setContext(getApplicationContext());
