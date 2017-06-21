@@ -33,7 +33,7 @@ public class MyInfoActivity extends AppCompatActivity {
         id.setText(loginUserData.id);
         name.setText(loginUserData.name);
         birth.setText(loginUserData.birth);
-        country.setText(loginUserData.area);
+        country.setText(loginUserData.location);
         position.setText(loginUserData.preferredPosition);
         team.setText(loginUserData.myTeamName);
         speed.setText(loginUserData.mySpeed);

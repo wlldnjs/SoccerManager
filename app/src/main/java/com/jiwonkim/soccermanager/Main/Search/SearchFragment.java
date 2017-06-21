@@ -1,6 +1,9 @@
 package com.jiwonkim.soccermanager.Main.Search;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,6 +14,8 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -20,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jiwonkim.soccermanager.Application.ApplicationController;
+import com.jiwonkim.soccermanager.Main.Login.UserData;
 import com.jiwonkim.soccermanager.Network.NetworkService;
 import com.jiwonkim.soccermanager.R;
 
@@ -43,6 +49,7 @@ public class SearchFragment extends Fragment{
     SearchAdapter searchUserAdapter, searchTeamAdapter;
     FrameLayout searchResult;
     NetworkService service;
+    ArrayList<UserData> searchUserDatas;
 
     public SearchFragment() {
     }
@@ -83,11 +90,8 @@ public class SearchFragment extends Fragment{
 
         itemTeamDatas = new ArrayList<SearchListData>();
         itemUserDatas = new ArrayList<SearchListData>();
-//        itemDatas.add(new SearchListData(R.drawable.man,"hangyu","최한규","전곡조기축구회"));
-//        itemDatas.add(new SearchListData(R.drawable.man,"jiwon","김지원","동두천FC"));
-//        itemDatas.add(new SearchListData(R.drawable.man,"jinsung","윤진성","노원볼보이"));
-//        itemDatas.add(new SearchListData(R.drawable.man,"youngbum","김영범",""));
-//        itemDatas.add(new SearchListData(R.drawable.man,"2no","백인호","노원FC"));
+
+        searchUserDatas = new ArrayList<UserData>();
 
         editSearch.setImeOptions(EditorInfo.IME_ACTION_DONE);       // 키보드 확인버튼 누를 시 동작 이벤트
         editSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -99,8 +103,8 @@ public class SearchFragment extends Fragment{
                 return false;
             }
         });
-        searchTeamAdapter = new SearchAdapter(itemTeamDatas,clickListener);
-        searchUserAdapter = new SearchAdapter(itemUserDatas,clickListener);
+        searchTeamAdapter = new SearchAdapter(itemTeamDatas,teamClickListener);
+        searchUserAdapter = new SearchAdapter(itemUserDatas,userClickListener);
         recyclerSearch1.setAdapter(searchTeamAdapter);
         recyclerSearch2.setAdapter(searchUserAdapter);
         searchBtn.setOnClickListener(new View.OnClickListener() {
@@ -115,10 +119,15 @@ public class SearchFragment extends Fragment{
                     @Override
                     public void onResponse(Call<SearchUserResult> call, Response<SearchUserResult> response) {
                         if(response.isSuccessful()){
+                            searchUserDatas.removeAll(searchUserDatas);
                             if(response.body().status.equals("success")){
                                 if(!editSearch.getText().toString().equals("")) {
-                                    itemUserDatas.add(new SearchListData(R.drawable.man, response.body().resultData.id, response.body().resultData.name, response.body().resultData.myTeamName));
+                                    for(int i=0; i<response.body().resultData.size(); i++){
+                                        searchUserDatas.add(response.body().resultData.get(i));
+                                        itemUserDatas.add(new SearchListData(R.drawable.man, response.body().resultData.get(i).id, response.body().resultData.get(i).name, response.body().resultData.get(i).myTeamName));
+                                    }
                                 }
+
                                 searchTeamAdapter.notifyDataSetChanged();
                                 searchUserAdapter.notifyDataSetChanged();
                             }
@@ -135,11 +144,66 @@ public class SearchFragment extends Fragment{
         return layout;
     }
 
-    public View.OnClickListener clickListener = new View.OnClickListener() {
+    public View.OnClickListener userClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            final int position = recyclerSearch2.getChildPosition(v);
+//            Toast.makeText(context, (position+1)+"번째 유저 item", Toast.LENGTH_SHORT).show();
+
+            // 다이얼로그 생성
+            LayoutInflater dialog = LayoutInflater.from(context);
+            final View dialogLayout = dialog.inflate(R.layout.custom_dialog, null);
+            final Dialog myDialog = new Dialog(getActivity());
+
+            // 다이얼로그 타이틀제거, 투명
+            myDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+            myDialog.setContentView(dialogLayout);
+
+            final TextView dialogId = (TextView)dialogLayout.findViewById(R.id.dialog_id);
+            final TextView dialogName = (TextView)dialogLayout.findViewById(R.id.dialog_name);
+            final TextView dialogBirth = (TextView)dialogLayout.findViewById(R.id.dialog_birth);
+            final TextView dialogCountry = (TextView)dialogLayout.findViewById(R.id.dialog_country);
+            final TextView dialogPosition = (TextView)dialogLayout.findViewById(R.id.dialog_position);
+            final TextView dialogTeam = (TextView)dialogLayout.findViewById(R.id.dialog_team);
+            final TextView dialogSpeed = (TextView)dialogLayout.findViewById(R.id.dialog_speed);
+            final TextView dialogAcc = (TextView)dialogLayout.findViewById(R.id.dialog_acc);
+            final TextView dialogHealth = (TextView)dialogLayout.findViewById(R.id.dialog_health);
+            final TextView dialogAgil = (TextView)dialogLayout.findViewById(R.id.dialog_agil);
+            final TextView dialogAver = (TextView)dialogLayout.findViewById(R.id.dialog_aver);
+
+            dialogId.setText(searchUserDatas.get(position).id);
+            dialogName.setText(searchUserDatas.get(position).name);
+            dialogBirth.setText(searchUserDatas.get(position).birth);
+            dialogCountry.setText(searchUserDatas.get(position).location);
+            dialogPosition.setText(searchUserDatas.get(position).preferredPosition);
+            dialogTeam.setText(searchUserDatas.get(position).myTeamName);
+            dialogSpeed.setText(searchUserDatas.get(position).mySpeed);
+            dialogAcc.setText(searchUserDatas.get(position).acceleration);
+            dialogHealth.setText(searchUserDatas.get(position).health);
+            dialogAgil.setText(searchUserDatas.get(position).agility);
+            float total =(float)(Integer.parseInt(dialogSpeed.getText().toString()) +Integer.parseInt(dialogAcc.getText().toString()) +Integer.parseInt(dialogHealth.getText().toString()) +Integer.parseInt(dialogAgil.getText().toString()))/4;
+            dialogAver.setText(String.valueOf(total));
+
+            // 다이얼로그 크기 조정
+            WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
+            Window window = myDialog.getWindow();
+            layoutParams.copyFrom(window.getAttributes());
+            layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT;
+            layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
+            window.setAttributes(layoutParams);
+
+            myDialog.show();
+        }
+    };
+
+    public View.OnClickListener teamClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             final int position = recyclerSearch1.getChildPosition(v);
-            Toast.makeText(context, (position+1)+"번째 item", Toast.LENGTH_SHORT).show();
+
+            Toast.makeText(context, (position+1)+"번째 팀 item", Toast.LENGTH_SHORT).show();
         }
     };
 }

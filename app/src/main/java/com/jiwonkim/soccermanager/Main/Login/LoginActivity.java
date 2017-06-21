@@ -67,7 +67,7 @@ public class LoginActivity extends AppCompatActivity {
                                 loginUserData.password = response.body().resultData.password;
                                 loginUserData.name = response.body().resultData.name;
                                 loginUserData.birth = response.body().resultData.birth;
-                                loginUserData.area = response.body().resultData.area;
+                                loginUserData.location = response.body().resultData.location;
                                 loginUserData.preferredPosition = response.body().resultData.preferredPosition;
                                 String newPosition = "";
                                 if(loginUserData.preferredPosition.contains("f")){

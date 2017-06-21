@@ -9,7 +9,7 @@ public class UserData {
     public String password;
     public String name;
     public String birth;
-    public String area;
+    public String location;
     public String preferredPosition;
     public String myTeamName;
     public String mySpeed;

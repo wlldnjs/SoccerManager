@@ -1,6 +1,7 @@
 package com.jiwonkim.soccermanager.Main;
 
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -27,6 +28,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private long backKeyPressedTime = 0;
     private Toast toast;
 //    HomeFragment homeFragment;
+
+    public static MediaPlayer mp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,8 +75,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
 
         });
-
-
+        mp = MediaPlayer.create(this,R.raw.music);
+        mp.setLooping(true);
+        mp.start();
+//        startService(new Intent("com.jiwonkim.soccermanager"));
     }
 
     @Override
@@ -178,7 +183,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //    @Override
 //    protected void onResume() {
 //        super.onResume();
-//        FragmentTransaction ft = getFragmentManager().beginTransaction();
-////        ft.detach(homeFragment).attach(homeFragment).commit();
+//        if(!mp.isPlaying()){
+//            mp.start();
+//        }
+//        Log.d("액티비티 생명주기","리즘ㅁ");
 //    }
+//
+//
+//    @Override
+//    protected void onStop() {
+//        super.onStop();
+//        Log.d("액티비티 생명주기","스땁");
+//        stopService(new Intent("com.jiwonkim.soccermanager"));
+//    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mp.stop();
+    }
+
+    @Override
+    protected void onUserLeaveHint() {
+//        mp.pause();
+    }
 }
