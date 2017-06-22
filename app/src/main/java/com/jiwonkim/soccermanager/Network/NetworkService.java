@@ -10,6 +10,9 @@ import com.jiwonkim.soccermanager.Main.Regist.RegistResult;
 import com.jiwonkim.soccermanager.Main.Search.RegistTeamData;
 import com.jiwonkim.soccermanager.Main.Search.RegistTeamResult;
 import com.jiwonkim.soccermanager.Main.Search.SearchUserResult;
+import com.jiwonkim.soccermanager.Main.Talk.TalkSearch.TalkSearchResult;
+import com.jiwonkim.soccermanager.Main.Talk.TalkWrite.TalkDatas;
+import com.jiwonkim.soccermanager.Main.Talk.TalkWrite.TalkWriteResult;
 import com.jiwonkim.soccermanager.Main.TeamPage.TeamManage.FindTeamData.MemberQuit.MemberQuitData;
 import com.jiwonkim.soccermanager.Main.TeamPage.TeamManage.FindTeamData.MemberQuit.MemberQuitResult;
 import com.jiwonkim.soccermanager.Main.TeamPage.TeamManage.FindTeamData.MyTeamFindResult;
@@ -77,6 +80,12 @@ public interface NetworkService {
     Call<RegistTeamResult> getRegistTeamResult(@Body RegistTeamData registTeamData);
 
     // 게시판 불러오기
+    @GET("board/search/{name}")
+    Call<TalkSearchResult> getTalkSearchResult(@Path("name") String name);
 
     // 게시글 쓰기
+    @POST("board/write")
+    Call<TalkWriteResult> getTalkWriteResult(@Body TalkDatas talkDatas);
+
+
 }
