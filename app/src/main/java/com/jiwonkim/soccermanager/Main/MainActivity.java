@@ -1,6 +1,7 @@
 package com.jiwonkim.soccermanager.Main;
 
 
+import android.app.Activity;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -19,6 +20,8 @@ import com.jiwonkim.soccermanager.Main.Search.SearchFragment;
 import com.jiwonkim.soccermanager.Main.Talk.TalkFragment;
 import com.jiwonkim.soccermanager.R;
 
+import java.util.ArrayList;
+
 import static com.jiwonkim.soccermanager.R.id.schedule;
 
 
@@ -32,10 +35,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //    HomeFragment homeFragment;
 
     public static MediaPlayer mp;
+    public static ArrayList<Activity> activityList = new ArrayList<Activity>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        activityList.add(this);
         setContentView(R.layout.activity_main);
 
         homeBtn = (ImageView) findViewById(R.id.home);
@@ -115,8 +120,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         public Fragment getItem(int position) {
             switch (position){
                 case 0:
-//                    homeFragment = new HomeFragment();
-                    return new HomeFragment();
+                    HomeFragment home = new HomeFragment();
+                    home.setContext(getApplication());
+                    return home;
                 case 1:
                     SearchFragment search = new SearchFragment();
                     search.setContext(getApplicationContext());
@@ -159,7 +165,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 previousMenu = 2;
                 break;
             case 3:
-                scheduleBtn.setImageResource(R.drawable.schedule_btn2);
+                scheduleBtn.setImageResource(R.drawable.my_team_btn2);
                 previousMenu = 3;
                 break;
             case 4:
@@ -178,7 +184,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case 2:
                 mypageBtn.setImageResource(R.drawable.mypage_btn1);
             case 3:
-                scheduleBtn.setImageResource(R.drawable.schedule_btn1);
+                scheduleBtn.setImageResource(R.drawable.my_team_btn1);
             case 4:
                 talkBtn.setImageResource(R.drawable.talk_btn1);
         }

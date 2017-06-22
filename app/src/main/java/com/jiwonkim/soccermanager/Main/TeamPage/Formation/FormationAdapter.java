@@ -1,4 +1,4 @@
-package com.jiwonkim.soccermanager.Main.Mypage.Formation;
+package com.jiwonkim.soccermanager.Main.TeamPage.Formation;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;

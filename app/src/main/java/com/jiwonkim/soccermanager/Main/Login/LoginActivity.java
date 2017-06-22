@@ -69,20 +69,7 @@ public class LoginActivity extends AppCompatActivity {
                                 loginUserData.birth = response.body().resultData.birth;
                                 loginUserData.location = response.body().resultData.location;
                                 loginUserData.preferredPosition = response.body().resultData.preferredPosition;
-                                String newPosition = "";
-                                if(loginUserData.preferredPosition.contains("f")){
-                                    newPosition += loginUserData.preferredPosition.replace("f", "공격수 ");
-                                }
-                                if(loginUserData.preferredPosition.contains("m")){
-                                    newPosition += loginUserData.preferredPosition.replace("m", "미드필더 ");
-                                }
-                                if(loginUserData.preferredPosition.contains("c")){
-                                    newPosition += loginUserData.preferredPosition.replace("c", "수비수 ");
-                                }
-                                if(loginUserData.preferredPosition.contains("g")){
-                                    newPosition += loginUserData.preferredPosition.replace("g", "골키퍼 ");
-                                }
-                                loginUserData.preferredPosition = newPosition;
+
                                 loginUserData.myTeamName = response.body().resultData.myTeamName;
                                 loginUserData.mySpeed = response.body().resultData.mySpeed;
                                 if(loginUserData.mySpeed == null){

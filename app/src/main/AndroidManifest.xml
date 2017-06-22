@@ -25,12 +25,14 @@
             android:name=".Main.SplashActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait" />
-        <activity android:name=".Main.Mypage.Formation.Formation" />
+        <activity android:name=".Main.TeamPage.Formation.FormationActivity" />
         <activity android:name=".Main.Mypage.Exam.ExamActivity" />
         <activity android:name=".Main.Mypage.Exam.ExamResultActivity" />
         <activity android:name=".Main.Mypage.MyInfo.MyInfoActivity" />
         <activity android:name=".Main.Mypage.SettingActivity" />
-        <activity android:name=".Main.TeamPage.TeamManage.TeamCreateActivity"></activity>
+        <activity android:name=".Main.TeamPage.TeamManage.CreateTeam.TeamCreateActivity" />
+        <activity android:name=".Main.TeamPage.TeamManage.FindTeamData.FindTeamDataActivity" />
+        <activity android:name=".Main.TeamPage.TeamManage.FindTeamMember.FindAllMemberActivity"></activity>
     </application>
 
 </manifest>

@@ -62,7 +62,7 @@ public class MypageFragment extends Fragment implements View.OnClickListener{
                 startActivity(new Intent(context, MyInfoActivity.class));
                 break;
 //            case R.id.teamInfo:
-//                startActivity(new Intent(context, Formation.class));
+//                startActivity(new Intent(context, FormationActivity.class));
 //                break;
             case R.id.setting:
                 startActivity(new Intent(context, SettingActivity.class));

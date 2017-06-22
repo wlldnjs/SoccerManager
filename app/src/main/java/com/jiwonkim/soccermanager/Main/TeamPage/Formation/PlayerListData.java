@@ -1,4 +1,4 @@
-package com.jiwonkim.soccermanager.Main.Mypage.Formation;
+package com.jiwonkim.soccermanager.Main.TeamPage.Formation;
 
 /**
  * Created by user on 2017-06-14.

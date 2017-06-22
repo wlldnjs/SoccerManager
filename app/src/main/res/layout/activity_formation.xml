@@ -5,7 +5,7 @@
     android:background="@drawable/fragment3"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.jiwonkim.soccermanager.Main.Mypage.Formation.Formation">
+    tools:context=".Main.TeamPage.Formation.FormationActivity">
 
     <LinearLayout
         android:layout_marginLeft="20dp"

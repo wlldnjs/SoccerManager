@@ -168,21 +168,31 @@ public class RegistActivity extends AppCompatActivity {
                     memberData.password = editPw.getText().toString();
                     memberData.name = editName.getText().toString();
                     memberData.birth = editBirth.getText().toString();
-                    memberData.area = country1.getSelectedItem().toString() +" " +country2.getSelectedItem().toString();
+                    memberData.location = country1.getSelectedItem().toString() +" " +country2.getSelectedItem().toString();
                     String position = "";
                     if(fw.isChecked()){
-                        position += "f";
+                        position += "공격수";
                     }
                     if(mf.isChecked()){
-                        position += "m";
+                        if(fw.isChecked()){
+                            position += ",";
+                        }
+                        position += "미드필더";
                     }
                     if(cf.isChecked()){
-                        position += "c";
+                        if(fw.isChecked() || mf.isChecked()){
+                            position += ",";
+                        }
+                        position += "수비수";
                     }
                     if(gk.isChecked()){
-                        position += "g";
+                        if(fw.isChecked() || mf.isChecked() || cf.isChecked()){
+                            position += ",";
+                        }
+                        position += "골키퍼";
                     }
-                    memberData.preferredPosition = position;
+                    memberData.preferredPosition = position.trim();
+//                    Toast.makeText(RegistActivity.this, position, Toast.LENGTH_SHORT).show();
                     Call<RegistResult> requestRegist = service.getRegistResult(memberData);
                     requestRegist.enqueue(new Callback<RegistResult>() {
                         @Override

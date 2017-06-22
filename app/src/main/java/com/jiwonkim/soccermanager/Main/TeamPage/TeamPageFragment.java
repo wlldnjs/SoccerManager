@@ -10,10 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
-import com.jiwonkim.soccermanager.Main.Mypage.Formation.Formation;
-import com.jiwonkim.soccermanager.Main.TeamPage.TeamManage.TeamCreateActivity;
+import com.jiwonkim.soccermanager.Main.TeamPage.Formation.FormationActivity;
+import com.jiwonkim.soccermanager.Main.TeamPage.TeamManage.CreateTeam.TeamCreateActivity;
+import com.jiwonkim.soccermanager.Main.TeamPage.TeamManage.FindTeamData.FindTeamDataActivity;
+import com.jiwonkim.soccermanager.Main.TeamPage.TeamManage.FindTeamMember.FindAllMemberActivity;
 import com.jiwonkim.soccermanager.R;
 
 import static com.jiwonkim.soccermanager.Main.Login.LoginActivity.loginUserData;
@@ -71,19 +72,18 @@ public class TeamPageFragment extends Fragment implements View.OnClickListener{
         switch (v.getId()){
             case R.id.createTeamOrTeamInfo:
                     if((int)createTeamOrTeamInfo.getTag() == 0){
-
                         startActivity(new Intent(context, TeamCreateActivity.class));
                     } else if((int)createTeamOrTeamInfo.getTag() == 1){
-                        Toast.makeText(context, "구단 정보를 보자", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(context, FindTeamDataActivity.class));
                     }
                 break;
 
             case R.id.formationChange:
-                startActivity(new Intent(context, Formation.class));
+                startActivity(new Intent(context, FormationActivity.class));
                 break;
 
             case R.id.teamMemberShow:
-
+                startActivity(new Intent(context, FindAllMemberActivity.class));
                 break;
         }
 

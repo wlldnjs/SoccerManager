@@ -45,7 +45,7 @@
             android:layout_height="match_parent"/>
 
         <ImageView
-            android:src="@drawable/schedule_btn1"
+            android:src="@drawable/my_team_btn1"
             android:id="@+id/schedule"
             android:layout_width="0dp"
             android:layout_weight="3"

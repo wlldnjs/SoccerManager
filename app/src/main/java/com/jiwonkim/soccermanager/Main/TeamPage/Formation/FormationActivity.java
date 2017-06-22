@@ -1,4 +1,4 @@
-package com.jiwonkim.soccermanager.Main.Mypage.Formation;
+package com.jiwonkim.soccermanager.Main.TeamPage.Formation;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -16,12 +16,22 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.jiwonkim.soccermanager.Application.ApplicationController;
+import com.jiwonkim.soccermanager.Main.TeamPage.TeamManage.FindTeamMember.FindTeamMemberResult;
+import com.jiwonkim.soccermanager.Network.NetworkService;
 import com.jiwonkim.soccermanager.R;
 
 import java.util.ArrayList;
 
-public class Formation extends AppCompatActivity implements View.OnTouchListener{
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import static com.jiwonkim.soccermanager.Main.Login.LoginActivity.loginUserData;
+
+public class FormationActivity extends AppCompatActivity implements View.OnTouchListener{
     Button squad1,squad2,squad3;
     RecyclerView recyclerPlayer;
     LinearLayoutManager linearLayoutManager;
@@ -32,11 +42,13 @@ public class Formation extends AppCompatActivity implements View.OnTouchListener
     PlayerListData player;
     LinearLayout fwArea, mfArea, cfArea, gkArea;
     int tag = 1000;
+    NetworkService service;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formation);
+        service = ApplicationController.getInstance().getNetworkService();
 
         recyclerPlayer = (RecyclerView)findViewById(R.id.recycler_player_list);
         recyclerPlayer.setHasFixedSize(true);
@@ -47,20 +59,42 @@ public class Formation extends AppCompatActivity implements View.OnTouchListener
         recyclerPlayer.setLayoutManager(linearLayoutManager);
 
         itemDatas = new ArrayList<PlayerListData>();
-        itemDatas.add(new PlayerListData(R.drawable.man,"김지원"));
-        itemDatas.add(new PlayerListData(R.drawable.man,"최한규"));
-        itemDatas.add(new PlayerListData(R.drawable.man,"김영범"));
-        itemDatas.add(new PlayerListData(R.drawable.man,"박형준"));
-        itemDatas.add(new PlayerListData(R.drawable.man,"장지원"));
-        itemDatas.add(new PlayerListData(R.drawable.man,"백인호"));
-        itemDatas.add(new PlayerListData(R.drawable.man,"윤진성"));
-        itemDatas.add(new PlayerListData(R.drawable.man,"김현"));
-        itemDatas.add(new PlayerListData(R.drawable.man,"주정태"));
-        itemDatas.add(new PlayerListData(R.drawable.man,"김광호"));
-        itemDatas.add(new PlayerListData(R.drawable.man,"염규성"));
+        Call<FindTeamMemberResult> requestTeamMember = service.getMyTeamMemberResult(loginUserData.myTeamName);
+        requestTeamMember.enqueue(new Callback<FindTeamMemberResult>() {
+            @Override
+            public void onResponse(Call<FindTeamMemberResult> call, Response<FindTeamMemberResult> response) {
+                if(response.isSuccessful()){
+                    if(response.body().status.equals("success")){
+                        for(int i=0; i< response.body().resultData.size();i++){
+                            itemDatas.add(new PlayerListData(R.drawable.man,response.body().resultData.get(i).name));
+                            formationAdapter = new FormationAdapter(itemDatas,touchListener);
+                            recyclerPlayer.setAdapter(formationAdapter);
+                        }
+                    } else {
+                        Toast.makeText(FormationActivity.this, response.body().reason, Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
 
-        formationAdapter = new FormationAdapter(itemDatas,touchListener);
-        recyclerPlayer.setAdapter(formationAdapter);
+            @Override
+            public void onFailure(Call<FindTeamMemberResult> call, Throwable t) {
+                Toast.makeText(FormationActivity.this, "서버 상태를 확인해주세요.", Toast.LENGTH_SHORT).show();
+            }
+        });
+//        itemDatas.add(new PlayerListData(R.drawable.man,"김지원"));
+//        itemDatas.add(new PlayerListData(R.drawable.man,"최한규"));
+//        itemDatas.add(new PlayerListData(R.drawable.man,"김영범"));
+//        itemDatas.add(new PlayerListData(R.drawable.man,"박형준"));
+//        itemDatas.add(new PlayerListData(R.drawable.man,"장지원"));
+//        itemDatas.add(new PlayerListData(R.drawable.man,"백인호"));
+//        itemDatas.add(new PlayerListData(R.drawable.man,"윤진성"));
+//        itemDatas.add(new PlayerListData(R.drawable.man,"김현"));
+//        itemDatas.add(new PlayerListData(R.drawable.man,"주정태"));
+//        itemDatas.add(new PlayerListData(R.drawable.man,"김광호"));
+//        itemDatas.add(new PlayerListData(R.drawable.man,"염규성"));
+
+//        formationAdapter = new FormationAdapter(itemDatas,touchListener);
+//        recyclerPlayer.setAdapter(formationAdapter);
     }
 
     public View.OnTouchListener touchListener = new View.OnTouchListener(){
@@ -85,18 +119,18 @@ public class Formation extends AppCompatActivity implements View.OnTouchListener
                         player = itemDatas.get(position);
                         LayoutInflater inflater = (LayoutInflater)getSystemService(LAYOUT_INFLATER_SERVICE);
                         RelativeLayout rootView = (RelativeLayout)findViewById(R.id.ground);
-                        LinearLayout targetView = new LinearLayout(Formation.this);
+                        LinearLayout targetView = new LinearLayout(FormationActivity.this);
                         targetView.setLayoutParams(new LinearLayout.LayoutParams(widthsize,heightsize));
                         targetView.setOrientation(LinearLayout.VERTICAL);
                         targetView.setTag(tag);
                         tag++;
-                        ImageView imageView = new ImageView(Formation.this);
+                        ImageView imageView = new ImageView(FormationActivity.this);
                         imageView.setImageResource(R.drawable.man);
                         imageView.setLayoutParams(new ViewGroup.LayoutParams(widthsize,widthsize));
                         imageView.setTag(tag);
                         tag++;
 
-                        TextView textView = new TextView(Formation.this);
+                        TextView textView = new TextView(FormationActivity.this);
                         textView.setText(player.name.toString());
                         textView.setTextSize(13);
                         textView.setTextColor(Color.WHITE);
@@ -104,7 +138,7 @@ public class Formation extends AppCompatActivity implements View.OnTouchListener
                         targetView.addView(imageView);
                         targetView.addView(textView);
                         rootView.addView(targetView);
-                        targetView.setOnTouchListener(Formation.this);
+                        targetView.setOnTouchListener(FormationActivity.this);
                         Log.i("액션 이벤트", "리스너 등록");
 
                         itemDatas.remove(position);

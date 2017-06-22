@@ -9,6 +9,6 @@ public class MemberData {
     public String password;
     public String name;
     public String birth;
-    public String area;
+    public String location;
     public String preferredPosition;
 }

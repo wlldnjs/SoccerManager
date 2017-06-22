@@ -1,5 +1,6 @@
-package com.jiwonkim.soccermanager.Main.TeamPage.TeamManage;
+package com.jiwonkim.soccermanager.Main.TeamPage.TeamManage.CreateTeam;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -8,6 +9,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.jiwonkim.soccermanager.Application.ApplicationController;
+import com.jiwonkim.soccermanager.Main.MainActivity;
+import com.jiwonkim.soccermanager.Main.TeamPage.TeamManage.FindTeamData.TeamInfo;
 import com.jiwonkim.soccermanager.Network.NetworkService;
 import com.jiwonkim.soccermanager.R;
 
@@ -16,6 +19,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static com.jiwonkim.soccermanager.Main.Login.LoginActivity.loginUserData;
+import static com.jiwonkim.soccermanager.Main.MainActivity.activityList;
 
 public class TeamCreateActivity extends AppCompatActivity {
     EditText createTeamName, createTeamLocation;
@@ -24,6 +28,7 @@ public class TeamCreateActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        activityList.add(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_team_create);
         service = ApplicationController.getInstance().getNetworkService();
@@ -49,8 +54,14 @@ public class TeamCreateActivity extends AppCompatActivity {
                                 if(response.body().status.equals("success")) {
                                     loginUserData.myTeamName = teamInfo.name;
                                     loginUserData.captain = loginUserData.name;
+                                    for(int i=0; i<activityList.size();i++){
+                                        activityList.get(i).finish();
+                                    }
+                                    activityList.remove(activityList);
                                     Toast.makeText(TeamCreateActivity.this, "구단 생성 완료.", Toast.LENGTH_SHORT).show();
-                                    finish();
+                                    Intent intent = new Intent(TeamCreateActivity.this, MainActivity.class);
+                                    startActivity(intent);
+//                                    finish();
                                 } else {
                                     Toast.makeText(TeamCreateActivity.this, response.body().reason, Toast.LENGTH_SHORT).show();
                                 }
