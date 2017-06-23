@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content" android:background="#777">
+    <EditText
+        android:id="@+id/edit_talk_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:hint="제목"
+        android:textColor="#ffffff"
+        android:singleLine="true"/>
+
+    <EditText
+        android:id="@+id/edit_talk_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:hint="내용"
+        android:textColor="#ffffff" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp">
+        <Button
+            android:id="@+id/talk_write_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="게시"
+            android:textSize="18sp"
+            android:textColor="#ffffff"
+            android:background="@drawable/rectangle_stroke_white"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="5dp"
+            />
+
+        <Button
+            android:id="@+id/talk_cancel_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="취소"
+            android:textSize="18sp"
+            android:textColor="#ffffff"
+            android:background="@drawable/rectangle_stroke_white"
+            android:layout_alignParentBottom="true"
+            android:layout_toLeftOf="@id/talk_write_btn"
+            android:layout_margin="5dp"
+            />
+    </RelativeLayout>
+</LinearLayout>

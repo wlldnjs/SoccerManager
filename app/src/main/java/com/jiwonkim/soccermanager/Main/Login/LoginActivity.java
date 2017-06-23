@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.jiwonkim.soccermanager.Application.ApplicationController;
 import com.jiwonkim.soccermanager.Main.MainActivity;
 import com.jiwonkim.soccermanager.Main.Regist.RegistActivity;
+import com.jiwonkim.soccermanager.Main.SplashActivity;
 import com.jiwonkim.soccermanager.Network.NetworkService;
 import com.jiwonkim.soccermanager.R;
 
@@ -33,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-//        startActivity(new Intent(this, SplashActivity.class));    // 스플래시
+        startActivity(new Intent(this, SplashActivity.class));    // 스플래시
         service = ApplicationController.getInstance().getNetworkService();
 
         regist = (TextView)findViewById(R.id.regist);

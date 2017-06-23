@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Toast toast;
 //    HomeFragment homeFragment;
 
-    public static MediaPlayer mp;
+    public static MediaPlayer mp = null;
     public static ArrayList<Activity> activityList = new ArrayList<Activity>();
 
     @Override
@@ -82,9 +82,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
 
         });
-        mp = MediaPlayer.create(this,R.raw.music);
-        mp.setLooping(true);
-        mp.start();
+        if(mp != null) {
+            mp = MediaPlayer.create(this, R.raw.music);
+            mp.setLooping(true);
+            mp.start();
+        }
 //        startService(new Intent("com.jiwonkim.soccermanager"));
     }
 

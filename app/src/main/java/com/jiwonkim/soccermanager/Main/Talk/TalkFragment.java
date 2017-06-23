@@ -1,7 +1,7 @@
 package com.jiwonkim.soccermanager.Main.Talk;
 
+import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,9 +13,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -98,30 +98,29 @@ public class TalkFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         talkWriteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialog = new AlertDialog.Builder(getActivity());
-                LinearLayout dialogView = new LinearLayout(context);
-                dialogView.setOrientation(LinearLayout.VERTICAL);
-                dialog.setTitle("게시물 작성");
-                final TextView textViewTitle = new TextView(context);
-                textViewTitle.setText("제목");
-                final EditText editTextTitle = new EditText(context);
-                dialogView.addView(textViewTitle);
-                dialogView.addView(editTextTitle);
-                final TextView textViewDetail = new TextView(context);
-                textViewDetail.setText("내용");
-                final EditText editTextDetail = new EditText(context);
-                dialogView.addView(textViewDetail);
-                dialogView.addView(editTextDetail);
-                dialog.setView(dialogView);
-                dialog.setPositiveButton("게시", new DialogInterface.OnClickListener() {
+                // 다이얼로그 생성
+                LayoutInflater dialog = LayoutInflater.from(context);
+                final View dialogLayout = dialog.inflate(R.layout.custom_dialog_write_talk, null);
+                final Dialog myDialog = new Dialog(getActivity());
+
+                // 다이얼로그 타이틀제거
+                myDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                myDialog.setContentView(dialogLayout);
+
+                final TextView titleText = (TextView)dialogLayout.findViewById(R.id.edit_talk_title);
+                final TextView contentText = (TextView)dialogLayout.findViewById(R.id.edit_talk_content);
+                Button writeBtn = (Button)dialogLayout.findViewById(R.id.talk_write_btn);
+                Button cancelBtn = (Button)dialogLayout.findViewById(R.id.talk_cancel_btn);
+
+                writeBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onClick(View v) {
                         TalkDatas talkDatas = new TalkDatas();
-                        talkDatas.title = editTextTitle.getText().toString();
+                        talkDatas.title = titleText.getText().toString();
                         talkDatas.id = loginUserData.id;
                         talkDatas.writer = loginUserData.name;
                         talkDatas.teamName = loginUserData.myTeamName;
-                        talkDatas.contents = editTextDetail.getText().toString();
+                        talkDatas.contents = contentText.getText().toString();
 
                         Call<TalkWriteResult> requestTalkWrite = service.getTalkWriteResult(talkDatas);
                         requestTalkWrite.enqueue(new Callback<TalkWriteResult>() {
@@ -144,6 +143,75 @@ public class TalkFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                                 Toast.makeText(context, "서버 상태를 확인해주세요.", Toast.LENGTH_SHORT).show();
                             }
                         });
+
+                        talkAdapter.notifyDataSetChanged();
+                        myDialog.dismiss();
+                    }
+                });
+
+                cancelBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        myDialog.cancel();
+                    }
+                });
+
+                // 다이얼로그 크기 조정
+                WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
+                Window window = myDialog.getWindow();
+                layoutParams.copyFrom(window.getAttributes());
+                layoutParams.width = WindowManager.LayoutParams.WRAP_CONTENT;
+                layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
+                window.setAttributes(layoutParams);
+
+                myDialog.show();
+
+//                dialog = new AlertDialog.Builder(getActivity());
+//                LinearLayout dialogView = new LinearLayout(context);
+//                dialogView.setOrientation(LinearLayout.VERTICAL);
+//                dialog.setTitle("게시물 작성");
+//                final TextView textViewTitle = new TextView(context);
+//                textViewTitle.setText("제목");
+//                final EditText editTextTitle = new EditText(context);
+//                dialogView.addView(textViewTitle);
+//                dialogView.addView(editTextTitle);
+//                final TextView textViewDetail = new TextView(context);
+//                textViewDetail.setText("내용");
+//                final EditText editTextDetail = new EditText(context);
+//                dialogView.addView(textViewDetail);
+//                dialogView.addView(editTextDetail);
+//                dialog.setView(dialogView);
+//                dialog.setPositiveButton("게시", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        TalkDatas talkDatas = new TalkDatas();
+//                        talkDatas.title = editTextTitle.getText().toString();
+//                        talkDatas.id = loginUserData.id;
+//                        talkDatas.writer = loginUserData.name;
+//                        talkDatas.teamName = loginUserData.myTeamName;
+//                        talkDatas.contents = editTextDetail.getText().toString();
+//
+//                        Call<TalkWriteResult> requestTalkWrite = service.getTalkWriteResult(talkDatas);
+//                        requestTalkWrite.enqueue(new Callback<TalkWriteResult>() {
+//                            @Override
+//                            public void onResponse(Call<TalkWriteResult> call, Response<TalkWriteResult> response) {
+//                                if(response.isSuccessful()){
+//                                    if(response.body().status.equals("success")){
+//                                        Toast.makeText(context, "글 게시가 완료되었습니다.", Toast.LENGTH_SHORT).show();
+////                                        itemDatas.add(new TalkListData(response.body().resultData.title, response.body().resultData.writer, response.body().resultData.time, response.body().resultData.contents));
+////                                        talkAdapter.notifyDataSetChanged();
+//                                        ListReload();
+//                                    } else {
+//                                        Toast.makeText(context, response.body().reason, Toast.LENGTH_SHORT).show();
+//                                    }
+//                                }
+//                            }
+//
+//                            @Override
+//                            public void onFailure(Call<TalkWriteResult> call, Throwable t) {
+//                                Toast.makeText(context, "서버 상태를 확인해주세요.", Toast.LENGTH_SHORT).show();
+//                            }
+//                        });
 //                        long now = System.currentTimeMillis();
 //                        Date date = new Date(now);
 //                        SimpleDateFormat sdfNow = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -152,18 +220,18 @@ public class TalkFragment extends Fragment implements SwipeRefreshLayout.OnRefre
 //                        itemDatas.add(new TalkListData(title,name,time,detail));
 
 
-                        talkAdapter.notifyDataSetChanged();
-                        dialog.dismiss();
-                    }
-                });
-                dialog.setNegativeButton("취소", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
-
-                dialog.show();
+//                        talkAdapter.notifyDataSetChanged();
+//                        dialog.dismiss();
+//                    }
+//                });
+//                dialog.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        dialog.cancel();
+//                    }
+//                });
+//
+//                dialog.show();
             }
         });
 
